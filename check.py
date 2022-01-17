@@ -90,14 +90,16 @@ while finish==False:
                        'form_name':'form',
                        'DOC_SERIE':serie,
                        'DOC_NUMBER':number,
-                       'captcha-input':login_details}
+                       'captcha-input':login_details
+            }
     r = s.post('http://services.fms.gov.ru/info-service.htm',params=params)           
-    
     soup = BeautifulSoup(r.content, features="html.parser")
     #print(soup)
     print(login_details)
-    if 'form_DOC_SERIE' not in soup.text:
+    #print('form_DOC_SERIE' not in r.text)
+    if ('form_DOC_SERIE' not in r.text)==True:
         finish=True
+        
         #continue
     
 if "Cреди недействительных не значится" in soup.text:
